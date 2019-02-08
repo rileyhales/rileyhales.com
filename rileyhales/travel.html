@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travels</title>
+</head>
+<body>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"
+    integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="
+    crossorigin=""></script>
+
+<div id="map" style="height: 100vh; padding: 0;"/>
+
+<script>
+    var map = L.map('map', {
+        zoom: 2.25,
+        minZoom: 1.25,
+        boxZoom: true,
+        maxBounds: L.latLngBounds(L.latLng(-100.0,-270.0), L.latLng(100.0, 270.0)),
+        center: [20, 0],
+    });
+
+    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+    var Esri_Imagery_Labels = L.esri.basemapLayer('ImageryLabels');
+
+    basemaps = {"Basemap": L.layerGroup([Esri_WorldImagery, Esri_Imagery_Labels]).addTo(map)};
+
+    drcap2019 = [
+        {
+            "coordinates": [-70.819213, 19.734485],
+            "type": "Point",
+            "properties": {"name": "27 Charcos"},
+            },
+        {
+            "coordinates": [-70.201398, 19.030929],
+            "type": "Point",
+            "properties": {"name": "Hatillo"},
+            },
+        {
+            "coordinates": [-69.923653, 18.488675],
+            "type": "Point",
+            "properties": {"name": "COE"},
+            },
+        {
+            "coordinates": [-69.918357, 18.466926],
+            "type": "Point",
+            "properties": {"name": "Park by Temple"},
+            },
+        {
+            "coordinates": [-69.917135, 18.466622],
+            "type": "Point",
+            "properties": {"name": "Santo Domingo Temple and MTC"},
+            },
+        {
+            "coordinates": [-69.926256, 18.450202],
+            "type": "Point",
+            "properties": {"name": "INDRHI"},
+            },
+        {
+            "coordinates": [-69.910303, 18.469293],
+            "type": "Point",
+            "properties": {"name": "Jardines del Teatro"},
+            },
+        {
+            "coordinates": [-69.905779, 18.468840],
+            "type": "Point",
+            "properties": {"name": "Food Truck Place"},
+            },
+        {
+            "coordinates": [-69.900948, 18.465057],
+            "type": "Point",
+            "properties": {"name": "El Conuco Restaurant"},
+            },
+        {
+            "coordinates": [-69.883879, 18.473259],
+            "type": "Point",
+            "properties": {"name": "Cathedral Santa Maria La Menor"},
+            },
+        {
+            "coordinates": [-68.415120, 18.672043],
+            "type": "Point",
+            "properties": {"name": "Melia Caribe Resort"},
+            },
+        {
+            "coordinates": [-80.145223, 26.071527],
+            "type": "Point",
+            "properties": {"name": "Ft Lauderdale Int Airport"},
+            },
+        ]
+
+    function onEachFeature(feature, layer) {
+        // does this feature have a property named popupContent?
+        if (feature.properties) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }
+
+    byu = []
+
+    mission_firenze = [
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Frankfurt Airport"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Appartamento a Firenze"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Duomo di Firenze - Florence Cathedral"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Casa di Vescovo - Bishop's House"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Chiesa - Church"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Ernest's House"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Cento Poveri - Restaurant"},
+            },
+        ]
+    mission_genova = [
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Appartamento a Genova"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "San Fruttuoso"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Casa di Robbie"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Duomo di Genova - Genoa Cathedral"},
+            },
+        {
+            "coordinates": [0, 0],
+            "type": "Point",
+            "properties": {"name": "Chiesa - Church"},
+            },
+        ]
+
+
+
+    drcap2019_layer = L.geoJSON(drcap2019, {onEachFeature: onEachFeature}).addTo(map),
+
+
+    mission_firenze_layer = L.geoJSON(mission_firenze, {onEachFeature: onEachFeature});
+    mission_genova_layer = L.geoJSON(mission_genova, {onEachFeature: onEachFeature});
+    // mission_ancona = []
+    // mission_milan = []
+    mission = L.layerGroup([mission_firenze_layer, mission_genova_layer]).addTo(map);
+
+    // byu_layer = L.geoJSON(byu, {onEachFeature: onEachFeature}).addTo(map),
+
+    trips = {
+        "DR Capstone 2019": drcap2019_layer,
+        // "School at BYU": byu_layer,
+        "Mission": mission,
+        }
+
+    lyrControls = L.control.layers(basemaps, trips).addTo(map);
+
+</script>
+
+</body>
+</html>
