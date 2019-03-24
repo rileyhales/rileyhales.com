@@ -1,16 +1,52 @@
-var map = L.map('map', {
+let map = L.map('map', {
     zoom: 3,
     minZoom: 1.25,
     boxZoom: true,
     maxBounds: L.latLngBounds(L.latLng(-100.0,-270.0), L.latLng(100.0, 270.0)),
-    center: [20, 0],
+    center: [25, -40],
     });
 
-var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
-var Esri_Imagery_Labels = L.esri.basemapLayer('ImageryLabels');
-
+let Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+let Esri_Imagery_Labels = L.esri.basemapLayer('ImageryLabels');
 basemaps = {"Basemap": L.layerGroup([Esri_WorldImagery, Esri_Imagery_Labels]).addTo(map)};
 
+    cisc_march_2019 = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {"name": "Miami-Dade Airport"},
+                "geometry": {
+                    "coordinates": [-80.275151, 25.795301],
+                    "type": "Point",
+                    },
+                },
+            {
+                "type": "Feature",
+                "properties": {"name": "Florida International University - Casacuba Center, MARC Building"},
+                "geometry": {
+                    "coordinates": [-80.373043, 25.754371],
+                    "type": "Point",
+                    },
+                },
+            {
+                "type": "Feature",
+                "properties": {"name": "La Quinta West"},
+                "geometry": {
+                    "coordinates": [-80.338578, 25.799071],
+                    "type": "Point",
+                    },
+                },
+            {
+                "type": "Feature",
+                "properties": {"name": "Atlanta Georgia Airport"},
+                "geometry": {
+                    "coordinates": [-84.434902, 33.644542],
+                    "type": "Point",
+                    },
+                },
+            ],
+        };
     drcap2019 = {
         "type": "FeatureCollection",
         "features": [
@@ -120,8 +156,20 @@ basemaps = {"Basemap": L.layerGroup([Esri_WorldImagery, Esri_Imagery_Labels]).ad
                     },
                 },
             ],
-        }
-    byu = {}
+        };
+    byu = {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {"name": "BYU"},
+                "geometry": {
+                    "coordinates": [-111.649085, 40.250192],
+                    "type": "Point",
+                    },
+                },
+            ],
+        };
     mission_firenze = {
         "type": "FeatureCollection",
         "features": [
@@ -190,55 +238,136 @@ basemaps = {"Basemap": L.layerGroup([Esri_WorldImagery, Esri_Imagery_Labels]).ad
                     },
                 },
             ],
-        }
+        };
     mission_genova = {
         "type": "FeatureCollection",
         "features": [
-            {
-                "type": "Feature",
-                "properties": {"name": "Appartamento a Genova"},
-                "geometry": {
-                    "coordinates": [0, 0],
-                    "type": "Point",
-                    },
-                },
-            {
-                "type": "Feature",
-                "properties": {"name": "San Fruttuoso"},
-                "geometry": {
-                    "coordinates": [0, 0],
-                    "type": "Point",
-                    },
-                },
-            {
-                "type": "Feature",
-                "properties": {"name": "Casa di Robbie"},
-                "geometry": {
-                    "coordinates": [0, 0],
-                    "type": "Point",
-                    },
-                },
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Appartamento a Genova"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "San Fruttuoso"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Casa di Robbie"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
             {
                 "type": "Feature",
                 "properties": {"name": "Duomo di Genova - Genoa Cathedral"},
                 "geometry": {
-                    "coordinates": [0, 0],
+                    "coordinates": [8.931212, 44.407730],
+                    "type": "Point",
+                    },
+                },
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Chiesa - Church"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            ],
+        };
+    mission_ancona = {
+        "type": "FeatureCollection",
+        "features": [
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Appartamento ad Ancona"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            {
+                "type": "Feature",
+                "properties": {"name": "San Marino"},
+                "geometry": {
+                    "coordinates": [12.456524, 43.936523],
                     "type": "Point",
                     },
                 },
             {
                 "type": "Feature",
-                "properties": {"name": "Chiesa - Church"},
+                "properties": {"name": "Duomo di Ancona - Ancona Cathedral"},
                 "geometry": {
-                    "coordinates": [0, 0],
+                    "coordinates": [13.510263, 43.625229],
+                    "type": "Point",
+                    },
+                },
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Chiesa - Church"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            ],
+        };
+    mission_milan = {
+        "type": "FeatureCollection",
+        "features": [
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Appartamento a Milano"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            {
+                "type": "Feature",
+                "properties": {"name": "Duomo di Milano"},
+                "geometry": {
+                    "coordinates": [9.191390, 45.464170],
+                    "type": "Point",
+                    },
+                },
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Mission Office"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            // {
+            //     "type": "Feature",
+            //     "properties": {"name": "Chiesa - Rione di Navigli"},
+            //     "geometry": {
+            //         "coordinates": [0, 0],
+            //         "type": "Point",
+            //         },
+            //     },
+            // Also make entries for the things you saw in como
+            {
+                "type": "Feature",
+                "properties": {"name": "Amsterdam International Airport"},
+                "geometry": {
+                    "coordinates": [4.764015, 52.310204],
                     "type": "Point",
                     },
                 },
             ],
-        }
-    mission_ancona = {}
-    mission_milan = {}
-    growingup = {
+        };
+    childhood = {
         "type": "FeatureCollection",
         "features": [
             {
@@ -282,7 +411,7 @@ basemaps = {"Basemap": L.layerGroup([Esri_WorldImagery, Esri_Imagery_Labels]).ad
                     },
                 },
             ],
-        }
+        };
 
 function onEachFeature(feature, layer) {
     // does this feature have a property named popupContent?
@@ -291,21 +420,19 @@ function onEachFeature(feature, layer) {
     }
 }
 
-drcap2019_layer = L.geoJSON(drcap2019, {onEachFeature: onEachFeature}).addTo(map),
-// byu_layer = L.geoJSON(byu, {onEachFeature: onEachFeature}).addTo(map),
-mission_firenze_layer = L.geoJSON(mission_firenze, {onEachFeature: onEachFeature});
-// mission_genova_layer = L.geoJSON(mission_genova, {onEachFeature: onEachFeature});
-// mission_ancona_layer = L.geoJSON(mission_ancona, {onEachFeature: onEachFeature});
-// mission_milan_layer = L.geoJSON(mission_milan, {onEachFeature: onEachFeature});
-mission = L.layerGroup([mission_firenze_layer]).addTo(map);
-growingup_layer = L.geoJSON(growingup, {onEachFeature: onEachFeature}).addTo(map);
 
+mission_firenze_layer = L.geoJSON(mission_firenze, {onEachFeature: onEachFeature});
+mission_genova_layer = L.geoJSON(mission_genova, {onEachFeature: onEachFeature});
+mission_ancona_layer = L.geoJSON(mission_ancona, {onEachFeature: onEachFeature});
+mission_milan_layer = L.geoJSON(mission_milan, {onEachFeature: onEachFeature});
+mission = L.layerGroup([mission_firenze_layer, mission_genova_layer, mission_ancona_layer, mission_milan_layer]).addTo(map);
 
 trips = {
-    "DR Capstone 2019": drcap2019_layer,
-    // "School at BYU": byu_layer,
-    "Mission": mission,
-    "Childhood": growingup_layer,
-    }
+    "Cuba Infrastructure Competition 3/2019": L.geoJSON(cisc_march_2019, {onEachFeature: onEachFeature}).addTo(map),
+    "Dominican Republic Capstone 1/2019": L.geoJSON(drcap2019, {onEachFeature: onEachFeature}).addTo(map),
+    "School at BYU 2014-2020": L.geoJSON(byu, {onEachFeature: onEachFeature}).addTo(map),
+    "Italy Milan Mission 2015": mission,
+    "Growing up in Arizona": L.geoJSON(childhood, {onEachFeature: onEachFeature}).addTo(map),
+    };
 
-lyrControls = L.control.layers(basemaps, trips).addTo(map);
+L.control.layers(basemaps, trips).addTo(map);
